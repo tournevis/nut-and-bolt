@@ -1,41 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Timers;
 
 public class Level : MonoBehaviour {
 	public const int MAX_PLAYERS = 4;
 
-	public int enableTuretMaxTime = 5000;
+	public float turetInterval = 5.0f;
+	public float trapdoorsInterval = 3.0f;
 
 	private ArrayList players;
 	private ArrayList bonuses;
 	private ArrayList weapons;
-    private static System.Timers.Timer timerTurret;
 
 	// Use this for initialization
 	void Start () {
         Debug.Log("Level Start");
-	    timerTurret = new System.Timers.Timer(10000);
-        timerTurret.Elapsed += new ElapsedEventHandler(enableTuret);
-        timerTurret.Interval = enableTuretMaxTime; // Turret 
-        timerTurret.Enabled = true;
+		// Turet timer
+		InvokeRepeating ("enableTurret", 0.0f, turetInterval);
+		// Trapdoor timer
+		InvokeRepeating ("enableTrapdoors", 0.0f, trapdoorsInterval);
     }
 
     // Update is called once per frame
     void Update () {
 
     }
-	
+
+	// Called when user quit game
     void OnApplicationQuit () {
-        timerTurret.Enabled = false;
+		CancelInvoke ("enableTurret");
+		CancelInvoke ("enableTrapdoors");
     }
 
 	/**
-	 * Enable tourret randomly each  
+	 * Enable tourret  
 	 */
-    private void enableTuret (object source, ElapsedEventArgs e) {
+    private void enableTurret () {
         Debug.Log("Enable turret");
     }
+
+	/**
+	 * Enable trapdoors  
+	 */
+	private void enableTrapdoors () {
+		Debug.Log("Enable trapdoors");
+	}
 
 	/* ******************************
 	 * Getters and setters

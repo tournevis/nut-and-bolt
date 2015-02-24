@@ -13,11 +13,23 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		currentLife = maxLife;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void ReceiveDamages(float damages) {
+		Debug.Log ("Player receives damages");
+		currentLife -= damages;
+		if (currentLife <= minLife) {
+			Die();
+		}
+	}
+
+	void Die () {
+		Debug.Log ("Player dies");
 	}
 }

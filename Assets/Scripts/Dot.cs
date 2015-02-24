@@ -12,7 +12,7 @@ public class Dot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("onDotTick", 0.1f, rateDamage);
+		InvokeRepeating("OnDotTick", 0.1f, rateDamage);
 
 		damage = Random.Range(minDamage, maxDamage);
 	}
@@ -28,14 +28,14 @@ public class Dot : MonoBehaviour {
 		CancelInvoke("onDotTick");
 	}
 
-	void onDotTick () {
+	void OnDotTick () {
 		if (isActive) {
 			Debug.Log("Apply dot damage");
-//			Apply(player, damage);
+//			Apply(player, damage); // TODO: Determine player affected by dot
 		}
 	}
 
-	void Apply (Player player, float damage) {
-		
+	void Apply (Player player, float damages) {
+		player.ReceiveDamages (damages);
 	}
 }

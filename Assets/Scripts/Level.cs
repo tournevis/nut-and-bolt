@@ -15,9 +15,9 @@ public class Level : MonoBehaviour {
 	void Start () {
         Debug.Log("Level Start");
 		// Turet timer
-		InvokeRepeating ("enableTurret", 0.0f, turetInterval);
+		InvokeRepeating ("EnableTurret", 0.0f, turetInterval);
 		// Trapdoor timer
-		InvokeRepeating ("enableTrapdoors", 0.0f, trapdoorsInterval);
+		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
     }
 
     // Update is called once per frame
@@ -27,36 +27,36 @@ public class Level : MonoBehaviour {
 
 	// Called when user quit game
     void OnApplicationQuit () {
-		CancelInvoke ("enableTurret");
-		CancelInvoke ("enableTrapdoors");
+		CancelInvoke ("EnableTurret");
+		CancelInvoke ("EnableTrapdoors");
     }
 
 	/**
 	 * Enable tourret  
 	 */
-    private void enableTurret () {
+    private void EnableTurret () {
         Debug.Log("Enable turret");
     }
 
 	/**
 	 * Enable trapdoors  
 	 */
-	private void enableTrapdoors () {
+	private void EnableTrapdoors () {
 		Debug.Log("Enable trapdoors");
 	}
 
 	/* ******************************
 	 * Getters and setters
 	 * ******************************/
-	public ArrayList getPlayers() {
+	public ArrayList GetPlayers() {
 		return players;
 	}
 
-	public ArrayList getBonuses() {
+	public ArrayList GetBonuses() {
 		return bonuses;
 	}
 
-	public ArrayList getWeapons() {
+	public ArrayList GetWeapons() {
 		return weapons;
 	}
 }

@@ -7,12 +7,10 @@ public class BonusTrigger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		renderer.enabled = false;
 	}
 
 	void Awake () {
-		isActive = true;
-		transform.position.Set (5.0f, 0.0f, 5.0f); // TODO: set random position
 		bonusType = Random.Range (1, 3);
 	}
 	
@@ -30,5 +28,15 @@ public class BonusTrigger : MonoBehaviour {
 			renderer.enabled = false;
 			isActive = false;
 		}
+	}
+
+	public void Activate() {
+		if (isActive)
+			return;
+
+		renderer.enabled = true;
+		isActive = true;
+		bonusType = Random.Range (1, 3);
+		transform.position.Set (0.0f, 0.0f, 0.0f); // TODO: set random position
 	}
 }

@@ -6,6 +6,11 @@ public class Level : MonoBehaviour {
 
 	public float turetInterval = 5.0f;
 	public float trapdoorsInterval = 3.0f;
+	public float weaponsInterval = 10.0f;
+	public float bonusInterval = 7.0f;
+
+	private WeaponTrigger weaponTrigger;
+	private BonusTrigger bonusTrigger;
 
 	public static PlayerRobot[] players;
 	public static Bonus bonusManager;
@@ -14,14 +19,18 @@ public class Level : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Debug.Log("Level Start");
-		// Turet timer
+
 		InvokeRepeating ("EnableTurret", 0.0f, turetInterval);
-		// Trapdoor timer
 		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
+		InvokeRepeating ("SendWeapon", 5.0f, weaponsInterval);
+		InvokeRepeating ("SendBonus", 3.0f, bonusInterval);
+
 
 		players = gameObject.GetComponentsInChildren<PlayerRobot> ();
 		weapons = gameObject.GetComponentsInChildren<Weapon> ();
 		bonusManager = gameObject.GetComponentInChildren<Bonus> ();
+		weaponTrigger = gameObject.GetComponentInChildren<WeaponTrigger> ();
+		bonusTrigger = gameObject.GetComponentInChildren<BonusTrigger> ();
     }
 
     // Update is called once per frame
@@ -33,6 +42,8 @@ public class Level : MonoBehaviour {
     void OnApplicationQuit () {
 		CancelInvoke ("EnableTurret");
 		CancelInvoke ("EnableTrapdoors");
+		CancelInvoke ("SendWeapon");
+		CancelInvoke ("SendBonus");
     }
 
 	/**
@@ -47,6 +58,20 @@ public class Level : MonoBehaviour {
 	 */
 	private void EnableTrapdoors () {
 		Debug.Log("Enable trapdoors");
+	}
+
+	/**
+	 * Enable weapon box  
+	 */
+	private void SendWeapon() {
+		weaponTrigger.Activate ();
+	}
+
+	/**
+	 * Enable bonus box  
+	 */
+	private void SendBonus() {
+		bonusTrigger.Activate ();
 	}
 
 	/**

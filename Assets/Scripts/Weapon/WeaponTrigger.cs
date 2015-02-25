@@ -6,12 +6,11 @@ public class WeaponTrigger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		renderer.enabled = false;
 	}
 
 	void Awake () {
-		isActive = true;
-		transform.position.Set (0.0f, 0.0f, 0.0f); // TODO: set random position
+
 	}
 	
 	// Update is called once per frame
@@ -28,5 +27,14 @@ public class WeaponTrigger : MonoBehaviour {
 			renderer.enabled = false;
 			isActive = false;
 		}
+	}
+
+	public void Activate() {
+		if (isActive)
+			return;
+
+		renderer.enabled = true;
+		isActive = true;
+		transform.position.Set (0.0f, 0.0f, 0.0f); // TODO: set random position
 	}
 }

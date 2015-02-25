@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PlayerRobot : MonoBehaviour {
+	public int id = 1;
 	public Color color;
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;
@@ -31,5 +32,9 @@ public class PlayerRobot : MonoBehaviour {
 
 	void Die () {
 		Debug.Log ("Player dies");
+	}
+
+	public void equipWeapon(Weapon w) {
+		weapon = w;
 	}
 }

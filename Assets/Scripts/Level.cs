@@ -7,9 +7,9 @@ public class Level : MonoBehaviour {
 	public float turetInterval = 5.0f;
 	public float trapdoorsInterval = 3.0f;
 
-	private ArrayList players;
-	private ArrayList bonuses;
-	private ArrayList weapons;
+	public static PlayerRobot[] players;
+	public static Bonus[] bonuses;
+	public static Weapon[] weapons;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,11 @@ public class Level : MonoBehaviour {
 		InvokeRepeating ("EnableTurret", 0.0f, turetInterval);
 		// Trapdoor timer
 		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
+
+		// set players in detecting objects in scene
+		players = gameObject.GetComponentsInChildren<PlayerRobot> ();
+		// set weapons in detecting objects in scene
+		weapons = gameObject.GetComponentsInChildren<Weapon> ();
     }
 
     // Update is called once per frame
@@ -45,18 +50,28 @@ public class Level : MonoBehaviour {
 		Debug.Log("Enable trapdoors");
 	}
 
-	/* ******************************
-	 * Getters and setters
-	 * ******************************/
-	public ArrayList GetPlayers() {
-		return players;
+	/**
+	 * Get random weapon from weapons array
+	 */
+	public static Weapon GetRandomWeapon() {
+		long i = Random.Range (0, weapons.Length);
+
+		return (Weapon)weapons.GetValue (i);
 	}
 
-	public ArrayList GetBonuses() {
-		return bonuses;
+	/**
+	 * Get random bonus from bonuses array
+	 */
+	public static Bonus GetRandomBonus() {
+		long i = Random.Range (0, bonuses.Length);
+		
+		return (Bonus)bonuses.GetValue (i);
 	}
 
-	public ArrayList GetWeapons() {
-		return weapons;
+	/**
+	 * Get player by its id
+	 */
+	public static PlayerRobot GetPlayerById(int id) {
+		return (PlayerRobot)players.GetValue(id);
 	}
 }

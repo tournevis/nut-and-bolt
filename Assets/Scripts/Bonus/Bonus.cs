@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bonus : MonoBehaviour {
 	public Time activityTime;
+	public bool isActive;
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,11 @@ public class Bonus : MonoBehaviour {
 	
 	}
 
-	void Apply (PlayerRobot p) {
+	public void Apply (PlayerRobot p) {
 	
+	}
+
+	public void enableBonus() {
+		isActive = true;
 	}
 }

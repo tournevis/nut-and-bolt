@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerRobot : MonoBehaviour {
@@ -8,6 +9,7 @@ public class PlayerRobot : MonoBehaviour {
 	private float minLife = 0.0f;
 	public float currentLife;
 	public Weapon weapon;
+	public Slider sliderLife;
 	public bool hasDot;
 	public ArrayList dots;
 	public float speedFactor = 1.0f;
@@ -16,6 +18,7 @@ public class PlayerRobot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentLife = maxLife;
+		sliderLife.value = currentLife;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +29,11 @@ public class PlayerRobot : MonoBehaviour {
 	public void ReceiveDamages(float damages) {
 		Debug.Log ("Player receives damages");
 		currentLife -= damages;
+		sliderLife.value = currentLife;
+
 		if (currentLife <= minLife) {
+			currentLife = minLife;
+			sliderLife.value = currentLife;
 			Die();
 		}
 	}
@@ -36,6 +43,7 @@ public class PlayerRobot : MonoBehaviour {
 		if (currentLife >= maxLife) {
 			currentLife = maxLife;
 		}
+		sliderLife.value = currentLife;
 	}
 
 	void Die () {

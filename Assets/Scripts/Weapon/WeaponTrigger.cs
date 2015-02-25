@@ -11,6 +11,7 @@ public class WeaponTrigger : MonoBehaviour {
 	}
 
 	void Awake () {
+		// Randomly place box
 		float x = Random.Range (-20.0f, 20.0f);
 		float z = Random.Range (-30.0f, 30.0f);
 		newPos = new Vector3(x, 5.0f, z);
@@ -23,6 +24,9 @@ public class WeaponTrigger : MonoBehaviour {
 		transform.position = newPos;
 	}
 
+	/**
+	 * Called when player walk throught weapon box
+	 */
 	void OnTriggerEnter (Collider col) {
 		if(isActive == false) return;
 
@@ -34,6 +38,9 @@ public class WeaponTrigger : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * Randomly place weapon box and activate it
+	 */
 	public void Activate() {
 		if (isActive)
 			return;

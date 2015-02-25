@@ -25,7 +25,7 @@ public class LifeBonus : IBonus {
 	}
 
 	public void Apply (PlayerRobot p) {
-		p.currentLife += 20;
+		p.AddLife (20.0f);
 	}
 
 	public void Unapply (PlayerRobot p) {

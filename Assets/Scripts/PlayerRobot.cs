@@ -31,6 +31,13 @@ public class PlayerRobot : MonoBehaviour {
 		}
 	}
 
+	public void AddLife(float value) {
+		currentLife += value;
+		if (currentLife >= maxLife) {
+			currentLife = maxLife;
+		}
+	}
+
 	void Die () {
 		Debug.Log ("Player dies");
 	}

@@ -8,7 +8,7 @@ public class Level : MonoBehaviour {
 	public float trapdoorsInterval = 3.0f;
 
 	public static PlayerRobot[] players;
-	public static Bonus[] bonuses;
+	public static Bonus bonusManager;
 	public static Weapon[] weapons;
 
 	// Use this for initialization
@@ -19,10 +19,9 @@ public class Level : MonoBehaviour {
 		// Trapdoor timer
 		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
 
-		// set players in detecting objects in scene
 		players = gameObject.GetComponentsInChildren<PlayerRobot> ();
-		// set weapons in detecting objects in scene
 		weapons = gameObject.GetComponentsInChildren<Weapon> ();
+		bonusManager = gameObject.GetComponentInChildren<Bonus> ();
     }
 
     // Update is called once per frame
@@ -57,15 +56,6 @@ public class Level : MonoBehaviour {
 		long i = Random.Range (0, weapons.Length);
 
 		return (Weapon)weapons.GetValue (i);
-	}
-
-	/**
-	 * Get random bonus from bonuses array
-	 */
-	public static Bonus GetRandomBonus() {
-		long i = Random.Range (0, bonuses.Length);
-		
-		return (Bonus)bonuses.GetValue (i);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerRobot : MonoBehaviour {
-	public int id = 1;
+	public int id = 0;
 	public Color color;
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;
@@ -11,6 +11,7 @@ public class PlayerRobot : MonoBehaviour {
 	public bool hasDot;
 	public ArrayList dots;
 	public float speedFactor = 1.0f;
+	public float receivedDamageFactor = 1.0f;
 
 	// Use this for initialization
 	void Start () {

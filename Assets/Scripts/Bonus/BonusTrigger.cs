@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BonusTrigger : MonoBehaviour {
 	public bool isActive = false;
+	private int bonusType;
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +13,7 @@ public class BonusTrigger : MonoBehaviour {
 	void Awake () {
 		isActive = true;
 		transform.position.Set (5.0f, 0.0f, 5.0f); // TODO: set random position
+		bonusType = Random.Range (1, 3);
 	}
 	
 	// Update is called once per frame
@@ -24,7 +26,7 @@ public class BonusTrigger : MonoBehaviour {
 		
 		PlayerRobot p = col.GetComponent<PlayerRobot> ();
 		if(p) {
-			Level.GetRandomBonus().Apply( Level.GetPlayerById(p.id) );
+			Level.bonusManager.Apply( Level.GetPlayerById(p.id), bonusType );
 			renderer.enabled = false;
 			isActive = false;
 		}

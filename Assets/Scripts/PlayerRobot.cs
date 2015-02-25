@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class PlayerRobot : MonoBehaviour {
 	public Color color;
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;

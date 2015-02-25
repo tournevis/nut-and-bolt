@@ -35,7 +35,7 @@ public class Dot : MonoBehaviour {
 		}
 	}
 
-	void Apply (Player player, float damages) {
-		player.ReceiveDamages (damages);
+	void Apply (PlayerRobot p, float damages) {
+		p.ReceiveDamages (damages);
 	}
 }

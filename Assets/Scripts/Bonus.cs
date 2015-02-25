@@ -14,7 +14,7 @@ public class Bonus : MonoBehaviour {
 	
 	}
 
-	void Apply (Player player) {
+	void Apply (PlayerRobot p) {
 	
 	}
 }

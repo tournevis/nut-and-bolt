@@ -23,6 +23,7 @@ public class PlayerShooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
@@ -43,16 +44,24 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle.Play ();
 
 		gunLine.enabled = true;
-		gunLine.SetPosition (0, transform.position);
+//		gunLine.SetPosition (0, transform.position);
 
 		shootRay.origin = transform.position;
 		shootRay.direction = transform.forward;
 
+
+		gunLine.SetPosition (0, transform.position + shootRay.direction * 10);
+		gunLine.SetPosition (1, transform.position);
+
+
 		//Si rayon touche objet
 
 		if (Physics.Raycast (shootRay, out shootHit)) {
+			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
-			gunLine.SetPosition (1, shootHit.point);
+			if (playerHit != null) {
+				playerHit.ReceiveDamages(25);
+			}
 		}
 	}
 

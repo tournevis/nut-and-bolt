@@ -101,7 +101,7 @@ public class Level : MonoBehaviour {
 		Debug.Log ("Game ended");
 		for (int i = 0; i < players.Length; i++) {
 			if(players[i].isAlive) {
-				string text = "PLAYER " + players[i].id.ToString () + " WINS!";
+				string text = "PLAYER " + (players[i].id + 1).ToString () + " WINS!";
 				DisplayAnnounce(text);
 			}
 		}

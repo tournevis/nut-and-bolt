@@ -143,10 +143,10 @@ function UpdateSmoothedMovementDirection ()
 	var v;
 	var h;
 	
-	if (idPerson == 1) {
+	if (idPerson == 0) {
 		v = Input.GetAxisRaw("Vertical1");
 		h = Input.GetAxisRaw("Horizontal1");
-	} else if (idPerson == 2) {
+	} else if (idPerson == 1) {
 		v = Input.GetAxisRaw("Vertical2");
 		h = Input.GetAxisRaw("Horizontal2");
 	} else {
@@ -314,12 +314,12 @@ function Update() {
 		Input.ResetInputAxes();
 	}
 	
-	if (idPerson == 1) {
+	if (idPerson == 0) {
 		if (Input.GetButtonDown ("JumpRobot1"))
 		{
 			lastJumpButtonTime = Time.time;
 		}
-	} else if (idPerson == 2) {
+	} else if (idPerson == 1) {
 		if (Input.GetButtonDown ("JumpRobot2"))
 		{
 			lastJumpButtonTime = Time.time;

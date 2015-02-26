@@ -65,7 +65,10 @@ public class PlayerRobot : MonoBehaviour {
 	 */
 	void Die () {
 		Debug.Log ("Player dies");
-		renderer.enabled = false;
+		Renderer[] renderers = GetComponentsInChildren<Renderer> ();
+		for (int i = 0; i < renderers.Length; i++) {
+			renderers[i].enabled = true;
+		}
 		isAlive = false;
 		Level.OnPlayerDies ();
 	}
@@ -79,8 +82,8 @@ public class PlayerRobot : MonoBehaviour {
 
 		long i = Random.Range (0, weapons.Length);
 
-		weapon.renderer.enabled = false;
+		weapon.Disable ();
 		weapon = (Weapon)weapons.GetValue (i);
-		weapon.renderer.enabled = true;
+		weapon.Enable ();
 	}
 }

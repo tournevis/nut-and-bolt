@@ -21,8 +21,8 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
-		robot = transform.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
-		weapon = GetComponentInParent<Weapon> ();
+		robot = transform.parent.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
+		weapon = robot.weapon;
 		cadence = weapon.rate;
 		damage = weapon.damage;
 	}
@@ -53,7 +53,13 @@ public class PlayerShooting : MonoBehaviour {
 	}
 
 	void Shoot () {
+		weapon = robot.weapon;
+		cadence = weapon.rate;
+		damage = weapon.damage;
+
 		timer = 0;
+
+		Debug.Log (damage);
 
 		gunLight.enabled = true;
 

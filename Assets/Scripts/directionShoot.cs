@@ -14,14 +14,15 @@ public class directionShoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (robotParent.id == 0) {
-			viewV = Input.GetAxisRaw("VerticalView1");
-			viewH = Input.GetAxisRaw("HorizontalView1");
+			viewV = Input.GetAxis("VerticalView1");
+			viewH = Input.GetAxis("HorizontalView1");
 		} else if (robotParent.id == 1) {
 
 		} else {
 
 		}
-
-		transform.Rotate (0, viewH, 0);
+	
+		Debug.Log (viewV);
+		transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);
 	}
 }

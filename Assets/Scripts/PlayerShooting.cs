@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour {
 
-	public int damage = 10;
-	public float cadence = 0.15f;
+	private float damage = 10.0f;
+	private float cadence = 0.15f;
 	float timer;
 
 	ParticleSystem gunParticle;
@@ -12,6 +12,8 @@ public class PlayerShooting : MonoBehaviour {
 	LineRenderer gunLine;
 	Ray shootRay; // Ligne infinie
 	RaycastHit shootHit;
+	PlayerRobot robot;
+	Weapon weapon;
 
 
 	// Use this for initialization
@@ -19,6 +21,10 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
+		robot = transform.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
+		weapon = GetComponentInParent<Weapon> ();
+		cadence = weapon.rate;
+		damage = weapon.damage;
 	}
 	
 	// Update is called once per frame
@@ -27,11 +33,22 @@ public class PlayerShooting : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
-		if (Input.GetButton ("Fire1") && timer >= cadence) {
-			Shoot ();
-		} else {
-			stopShoot ();
+		if (robot.id == 1) {
+			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+				Debug.Log ("test1");
+				Shoot ();
+			} else {
+				stopShoot ();
+			}
+		} else if (robot.id == 2) {
+			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+				Debug.Log ("test2");
+				Shoot ();
+			} else {
+				stopShoot ();
+			}
 		}
+
 		
 	}
 
@@ -60,7 +77,19 @@ public class PlayerShooting : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				playerHit.ReceiveDamages(25);
+				if(weapon.isRoulette) {
+					int r = Random.Range(1, 6);
+					if(r == 6) {
+						// Shoot on target
+						playerHit.ReceiveDamages(weapon.damage);
+					} else {
+						// Shoot on player
+						robot.ReceiveDamages(weapon.damage);
+					}
+				} else {
+					playerHit.ReceiveDamages(weapon.damage);
+				}
+
 			}
 		}
 	}

@@ -43,6 +43,7 @@ var gravity = 20.0;
 var speedSmoothing = 10.0;
 var rotateSpeed = 500.0;
 var trotAfterSeconds = 3.0;
+var idPerson = 0;
 
 var canJump = true;
 
@@ -77,6 +78,7 @@ private var walkTimeStart = 0.0;
 private var lastJumpButtonTime = -10.0;
 // Last time we performed a jump
 private var lastJumpTime = -1.0;
+
 
 
 // the height we jumped from (Used to determine for how long to apply extra jump power after jumping.)
@@ -137,9 +139,22 @@ function UpdateSmoothedMovementDirection ()
 	// Right vector relative to the camera
 	// Always orthogonal to the forward vector
 	var right = Vector3(forward.z, 0, -forward.x);
+	
+	var v;
+	var h;
+	
+	if (idPerson == 1) {
+		v = Input.GetAxisRaw("Vertical1");
+		h = Input.GetAxisRaw("Horizontal1");
+	} else if (idPerson == 2) {
+		v = Input.GetAxisRaw("Vertical2");
+		h = Input.GetAxisRaw("Horizontal2");
+	} else {
+		v = 0;
+		h = 0;
+	}
 
-	var v = Input.GetAxisRaw("Vertical");
-	var h = Input.GetAxisRaw("Horizontal");
+
 
 	// Are we moving backwards or looking backwards
 	if (v < -0.2)
@@ -251,8 +266,13 @@ function ApplyGravity ()
 	if (isControllable)	// don't move player at all if not controllable.
 	{
 		// Apply gravity
-		var jumpButton = Input.GetButton("Jump");
-		
+		var jumpButton;
+//		if (idPerson == 1) {
+//			jumpButton = Input.GetButton("JumpRobot1");
+//		} else if (idPerson == 2) {
+//			jumpButton = Input.GetButton("JumpRobot2");
+//		}
+			
 		
 		// When we reach the apex of the jump we send out a message
 		if (jumping && !jumpingReachedApex && verticalSpeed <= 0.0)
@@ -293,10 +313,17 @@ function Update() {
 		// kill all inputs if not controllable.
 		Input.ResetInputAxes();
 	}
-
-	if (Input.GetButtonDown ("Jump"))
-	{
-		lastJumpButtonTime = Time.time;
+	
+	if (idPerson == 1) {
+		if (Input.GetButtonDown ("JumpRobot1"))
+		{
+			lastJumpButtonTime = Time.time;
+		}
+	} else if (idPerson == 2) {
+		if (Input.GetButtonDown ("JumpRobot2"))
+		{
+			lastJumpButtonTime = Time.time;
+		}
 	}
 
 	UpdateSmoothedMovementDirection();

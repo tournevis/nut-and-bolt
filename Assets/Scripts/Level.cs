@@ -15,7 +15,6 @@ public class Level : MonoBehaviour {
 
 	public static PlayerRobot[] players;
 	public static Bonus bonusManager;
-	public static Weapon[] weapons;
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +25,8 @@ public class Level : MonoBehaviour {
 		InvokeRepeating ("SendWeapon", 5.0f, weaponsInterval);
 		InvokeRepeating ("SendBonus", 3.0f, bonusInterval);
 
-
 		players = gameObject.GetComponentsInChildren<PlayerRobot> ();
 		playersAlive = players.Length;
-		weapons = gameObject.GetComponentsInChildren<Weapon> ();
 		bonusManager = gameObject.GetComponentInChildren<Bonus> ();
 		weaponTrigger = gameObject.GetComponentInChildren<WeaponTrigger> ();
 		bonusTrigger = gameObject.GetComponentInChildren<BonusTrigger> ();
@@ -77,15 +74,6 @@ public class Level : MonoBehaviour {
 	}
 
 	/**
-	 * Get random weapon from weapons array
-	 */
-	public static Weapon GetRandomWeapon() {
-		long i = Random.Range (0, weapons.Length);
-
-		return (Weapon)weapons.GetValue (i);
-	}
-
-	/**
 	 * Get player by its id
 	 */
 	public static PlayerRobot GetPlayerById(int id) {
@@ -97,7 +85,7 @@ public class Level : MonoBehaviour {
 	 */
 	public static void OnPlayerDies () {
 		playersAlive -= 1;
-		if (playersAlive <= 0) {
+		if (playersAlive <= 1) {
 			OnGameEnd();
 		}
 	}

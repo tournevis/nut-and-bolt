@@ -53,9 +53,8 @@ public class PlayerShooting : MonoBehaviour {
 
 	void Shoot () {
 
-//		Debug.Log (shootingSound.clip);
-		shootingSound.mute = false;
-		shootingSound.Play ();
+		Debug.Log (shootingSound.clip);
+
 
 		weapon = robot.weapon;
 		cadence = weapon.rate;
@@ -68,8 +67,11 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle.Stop ();
 		gunParticle.Play ();
 
+		shootingSound.enabled = true;
+		shootingSound.mute = false;
+		shootingSound.Play ();
+
 		gunLine.enabled = true;
-//		gunLine.SetPosition (0, transform.position);
 
 		shootRay.origin = transform.position;
 		shootRay.direction = transform.forward;
@@ -102,6 +104,7 @@ public class PlayerShooting : MonoBehaviour {
 	void stopShoot () {
 		gunLine.enabled = false;
 		gunLight.enabled = false;
+//		shootingSound.enabled = false;
 	}
 
 }

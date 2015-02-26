@@ -92,6 +92,8 @@ private var lastGroundedTime = 0.0;
 
 private var isControllable = true;
 
+
+
 function Awake ()
 {
 	moveDirection = transform.TransformDirection(Vector3.forward);
@@ -154,8 +156,7 @@ function UpdateSmoothedMovementDirection ()
 		h = 0;
 	}
 
-
-
+	
 	// Are we moving backwards or looking backwards
 	if (v < -0.2)
 		movingBack = true;
@@ -167,6 +168,8 @@ function UpdateSmoothedMovementDirection ()
 		
 	// Target direction relative to the camera
 	var targetDirection = h * right + v * forward;
+//	var targetDirectionView = viewH * right + viewV * forward;
+	
 	
 	// Grounded controls
 	if (grounded)

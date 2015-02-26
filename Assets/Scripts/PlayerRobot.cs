@@ -21,7 +21,7 @@ public class PlayerRobot : MonoBehaviour {
 	void Start () {
 		weapons = GetComponentsInChildren<Weapon> ();
 		currentLife = maxLife;
-		sliderLife.value = currentLife;
+//		sliderLife.value = currentLife;
 	}
 	
 	// Update is called once per frame

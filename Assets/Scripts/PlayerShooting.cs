@@ -33,14 +33,14 @@ public class PlayerShooting : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
-		if (robot.id == 1) {
+		if (robot.id == 0) {
 			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
 				Debug.Log ("test1");
 				Shoot ();
 			} else {
 				stopShoot ();
 			}
-		} else if (robot.id == 2) {
+		} else if (robot.id == 1) {
 			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
 				Debug.Log ("test2");
 				Shoot ();

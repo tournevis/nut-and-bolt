@@ -32,7 +32,7 @@ public class WeaponTrigger : MonoBehaviour {
 
 		PlayerRobot p = col.GetComponent<PlayerRobot> ();
 		if(p) {
-			Level.GetPlayerById(p.id).equipWeapon(Level.GetRandomWeapon());
+			Level.GetPlayerById(p.id).equipRandomWeapon();
 			renderer.enabled = false;
 			isActive = false;
 		}

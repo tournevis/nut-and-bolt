@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour {
 
-	public int damage = 10;
-	public float cadence = 0.15f;
+	private float damage = 10.0f;
+	private float cadence = 0.15f;
 	float timer;
 
 	ParticleSystem gunParticle;
@@ -13,6 +13,7 @@ public class PlayerShooting : MonoBehaviour {
 	Ray shootRay; // Ligne infinie
 	RaycastHit shootHit;
 	PlayerRobot robot;
+	Weapon weapon;
 
 
 	// Use this for initialization
@@ -20,7 +21,10 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
-		robot = transform.parent.GetComponent<PlayerRobot> ();
+		robot = transform.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
+		weapon = GetComponentInParent<Weapon> ();
+		cadence = weapon.rate;
+		damage = weapon.damage;
 	}
 	
 	// Update is called once per frame
@@ -73,7 +77,19 @@ public class PlayerShooting : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				playerHit.ReceiveDamages(25);
+				if(weapon.isRoulette) {
+					int r = Random.Range(1, 6);
+					if(r == 6) {
+						// Shoot on target
+						playerHit.ReceiveDamages(weapon.damage);
+					} else {
+						// Shoot on player
+						robot.ReceiveDamages(weapon.damage);
+					}
+				} else {
+					playerHit.ReceiveDamages(weapon.damage);
+				}
+
 			}
 		}
 	}

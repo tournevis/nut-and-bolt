@@ -6,6 +6,7 @@ public class PlayerRobot : MonoBehaviour {
 	public int id = 0;
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;
+	private Weapon[] weapons;
 	public float currentLife;
 	public Weapon weapon;
 	public Slider sliderLife;
@@ -17,6 +18,7 @@ public class PlayerRobot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		weapons = GetComponentsInChildren<Weapon> ();
 		currentLife = maxLife;
 		sliderLife.value = currentLife;
 	}
@@ -67,14 +69,18 @@ public class PlayerRobot : MonoBehaviour {
 		isAlive = false;
 		Level.OnPlayerDies ();
 	}
-
+	
 	/**
 	 * Equip new weapon when player win weaopn box
 	 */
-	public void equipWeapon(Weapon w) {
+	public void equipRandomWeapon() {
 		if (isAlive == false)
 			return;
 
-		weapon = w;
+		long i = Random.Range (0, weapons.Length);
+
+		weapon.renderer.enabled = false;
+		weapon = (Weapon)weapons.GetValue (i);
+		weapon.renderer.enabled = true;
 	}
 }

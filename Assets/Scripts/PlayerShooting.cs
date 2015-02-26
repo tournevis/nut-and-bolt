@@ -12,6 +12,7 @@ public class PlayerShooting : MonoBehaviour {
 	LineRenderer gunLine;
 	Ray shootRay; // Ligne infinie
 	RaycastHit shootHit;
+	PlayerRobot robot;
 
 
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
+		robot = transform.parent.GetComponent<PlayerRobot> ();
 	}
 	
 	// Update is called once per frame
@@ -27,11 +29,22 @@ public class PlayerShooting : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
-		if (Input.GetButton ("Fire1") && timer >= cadence) {
-			Shoot ();
-		} else {
-			stopShoot ();
+		if (robot.id == 1) {
+			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+				Debug.Log ("test1");
+				Shoot ();
+			} else {
+				stopShoot ();
+			}
+		} else if (robot.id == 2) {
+			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+				Debug.Log ("test2");
+				Shoot ();
+			} else {
+				stopShoot ();
+			}
 		}
+
 		
 	}
 

@@ -23,7 +23,7 @@ public class PlayerRobot : MonoBehaviour {
 		controls = GetComponent<ThirdPersonController> ();
 		weapons = GetComponentsInChildren<Weapon> ();
 		currentLife = maxLife;
-		sliderLife.value = currentLife;
+//		sliderLife.value = currentLife;
 	}
 	
 	// Update is called once per frame

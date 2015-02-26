@@ -13,9 +13,9 @@ public class BonusTrigger : MonoBehaviour {
 
 	void Awake () {
 		bonusType = Random.Range (1, 3);
-		float x = Random.Range (-20.0f, 20.0f);
-		float z = Random.Range (-30.0f, 30.0f);
-		newPos = new Vector3(x, 5.0f, z);
+		float x = Random.Range (-9.0f, 9.0f);
+		float z = Random.Range (-24.0f, 24.0f);
+		newPos = new Vector3(x, 0.7f, z);
 		transform.position = newPos;
 	}
 	
@@ -40,13 +40,11 @@ public class BonusTrigger : MonoBehaviour {
 		if (isActive)
 			return;
 
-		float x = Random.Range (-20.0f, 20.0f);
-		float z = Random.Range (-30.0f, 30.0f);
+		float x = Random.Range (-9.0f, 9.0f);
+		float z = Random.Range (-24.0f, 24.0f);
 		newPos = new Vector3(x, 0.7f, z);
 
 		renderer.enabled = true;
 		isActive = true;
-
-		 // TODO: set random position
 	}
 }

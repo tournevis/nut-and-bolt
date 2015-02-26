@@ -6,6 +6,7 @@ public class PlayerRobot : MonoBehaviour {
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;
 	private Weapon[] weapons;
+	private ThirdPersonController controls;
 
 	public int id = 0;
 	public float currentLife;
@@ -19,9 +20,10 @@ public class PlayerRobot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		controls = GetComponent<ThirdPersonController> ();
 		weapons = GetComponentsInChildren<Weapon> ();
 		currentLife = maxLife;
-		sliderLife.value = currentLife;
+//		sliderLife.value = currentLife;
 	}
 	
 	// Update is called once per frame
@@ -69,6 +71,7 @@ public class PlayerRobot : MonoBehaviour {
 			renderers[i].enabled = true;
 		}
 		isAlive = false;
+		controls.enabled = false;
 		Level.OnPlayerDies ();
 	}
 	

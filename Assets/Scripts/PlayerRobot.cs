@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerRobot : MonoBehaviour {
-	public int id = 0;
 	private float maxLife = 100.0f;
 	private float minLife = 0.0f;
 	private Weapon[] weapons;
+
+	public int id = 0;
 	public float currentLife;
 	public Weapon weapon;
 	public Slider sliderLife;
@@ -14,7 +15,7 @@ public class PlayerRobot : MonoBehaviour {
 	public ArrayList dots;
 	public float speedFactor = 1.0f;
 	public float receivedDamageFactor = 1.0f;
-	private bool isAlive = true;
+	public bool isAlive = true;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +36,6 @@ public class PlayerRobot : MonoBehaviour {
 		if (isAlive == false)
 			return;
 
-		Debug.Log ("Player receives damages");
 		currentLife -= (receivedDamageFactor * damages);
 		sliderLife.value = currentLife;
 
@@ -64,7 +64,6 @@ public class PlayerRobot : MonoBehaviour {
 	 * Player loose
 	 */
 	void Die () {
-		Debug.Log ("Player dies");
 		Renderer[] renderers = GetComponentsInChildren<Renderer> ();
 		for (int i = 0; i < renderers.Length; i++) {
 			renderers[i].enabled = true;
@@ -84,6 +83,7 @@ public class PlayerRobot : MonoBehaviour {
 
 		weapon.Disable ();
 		weapon = (Weapon)weapons.GetValue (i);
+		Level.DisplayAnnounce (weapon.name.ToUpper() + "!");
 		weapon.Enable ();
 	}
 }

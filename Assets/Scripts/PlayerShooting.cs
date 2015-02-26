@@ -82,23 +82,21 @@ public class PlayerShooting : MonoBehaviour {
 
 		//Si rayon touche objet
 
+		if(weapon.isRoulette) {
+			int r = Random.Range(1, 6);
+			if(r != 6) {
+				// Shoot on player
+				robot.ReceiveDamages(weapon.damage);
+
+				return;
+			}
+		}
+
 		if (Physics.Raycast (shootRay, out shootHit)) {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				if(weapon.isRoulette) {
-					int r = Random.Range(1, 6);
-					if(r == 6) {
-						// Shoot on target
-						playerHit.ReceiveDamages(weapon.damage);
-					} else {
-						// Shoot on player
-						robot.ReceiveDamages(weapon.damage);
-					}
-				} else {
-					playerHit.ReceiveDamages(weapon.damage);
-				}
-
+				playerHit.ReceiveDamages(weapon.damage);
 			}
 		}
 	}

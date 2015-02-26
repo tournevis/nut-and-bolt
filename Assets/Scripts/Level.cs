@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Level : MonoBehaviour {
-	public const int MAX_PLAYERS = 4;
-
+	public Text anounce;
 	public float turetInterval = 5.0f;
 	public float trapdoorsInterval = 3.0f;
 	public float weaponsInterval = 10.0f;
 	public float bonusInterval = 7.0f;
 
+	private static Text _announcer;
 	private WeaponTrigger weaponTrigger;
 	private BonusTrigger bonusTrigger;
 	private static int playersAlive = 0;
+	private static Level instance;
 
 	public static PlayerRobot[] players;
 	public static Bonus bonusManager;
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Level Start");
+		instance = this;
+		_announcer = anounce;
+		DisplayAnnounce ("GO!");
 
 		InvokeRepeating ("EnableTurret", 0.0f, turetInterval);
 		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
@@ -95,5 +99,20 @@ public class Level : MonoBehaviour {
 	 */
 	private static void OnGameEnd() {
 		Debug.Log ("Game ended");
+		for (int i = 0; i < players.Length; i++) {
+			if(players[i].isAlive) {
+				string text = "PLAYER " + players[i].id.ToString () + " WINS!";
+				DisplayAnnounce(text);
+			}
+		}
+	}
+
+	public static void DisplayAnnounce(string text) {
+		_announcer.text = text;
+		instance.Invoke ("ClearAnnouce", 1.5f);
+	}
+
+	private void ClearAnnouce() {
+		_announcer.text = "";
 	}
 }

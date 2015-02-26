@@ -51,6 +51,5 @@ public class WeaponTrigger : MonoBehaviour {
 
 		renderer.enabled = true;
 		isActive = true;
-		transform.position.Set (0.0f, 0.0f, 0.0f); // TODO: set random position
 	}
 }

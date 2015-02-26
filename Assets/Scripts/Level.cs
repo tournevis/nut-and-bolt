@@ -49,14 +49,14 @@ public class Level : MonoBehaviour {
 	 * Enable tourret  
 	 */
     private void EnableTurret () {
-        Debug.Log("Enable turret");
+//        Debug.Log("Enable turret");
     }
 
 	/**
 	 * Enable trapdoors  
 	 */
 	private void EnableTrapdoors () {
-		Debug.Log("Enable trapdoors");
+//		Debug.Log("Enable trapdoors");
 	}
 
 	/**

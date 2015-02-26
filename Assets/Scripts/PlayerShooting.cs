@@ -35,14 +35,14 @@ public class PlayerShooting : MonoBehaviour {
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
 		if (robot.id == 0) {
 			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
-				Debug.Log ("test1");
+//				Debug.Log ("test1");
 				Shoot ();
 			} else {
 				stopShoot ();
 			}
 		} else if (robot.id == 1) {
 			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
-				Debug.Log ("test2");
+//				Debug.Log ("test2");
 				Shoot ();
 			} else {
 				stopShoot ();
@@ -58,8 +58,6 @@ public class PlayerShooting : MonoBehaviour {
 		damage = weapon.damage;
 
 		timer = 0;
-
-		Debug.Log (damage);
 
 		gunLight.enabled = true;
 
@@ -83,6 +81,7 @@ public class PlayerShooting : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
+				Debug.Log("HIT");
 				if(weapon.isRoulette) {
 					int r = Random.Range(1, 6);
 					if(r == 6) {

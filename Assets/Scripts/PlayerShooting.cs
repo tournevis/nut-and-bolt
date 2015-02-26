@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour {
 	RaycastHit shootHit;
 	PlayerRobot robot;
 	Weapon weapon;
-	AudioSource shootingSound; // Audio
+//	AudioSource shootingSound; // Audio
 
 
 	// Use this for initialization
@@ -22,7 +22,7 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
-		shootingSound = GetComponent<AudioSource> ();
+//		shootingSound = GetComponent<AudioSource> ();
 		robot = transform.parent.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
 		weapon = robot.weapon;
 		cadence = weapon.rate;
@@ -53,12 +53,14 @@ public class PlayerShooting : MonoBehaviour {
 
 	void Shoot () {
 
-		Debug.Log (shootingSound.clip);
+//		Debug.Log (shootingSound.clip);
 
 
 		weapon = robot.weapon;
 		cadence = weapon.rate;
 		damage = weapon.damage;
+
+		weapon.PlaySound ();
 
 		timer = 0;
 
@@ -67,9 +69,9 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle.Stop ();
 		gunParticle.Play ();
 
-		shootingSound.enabled = true;
-		shootingSound.mute = false;
-		shootingSound.Play ();
+//		shootingSound.enabled = true;
+//		shootingSound.mute = false;
+//		shootingSound.Play ();
 
 		gunLine.enabled = true;
 

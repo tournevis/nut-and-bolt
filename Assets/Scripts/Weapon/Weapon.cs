@@ -8,14 +8,15 @@ public class Weapon : MonoBehaviour {
 	public bool isRoulette = false;
 	public bool isDefault = false;
 	public bool isActive = false;
-//	public Dot dot;
-	public Time usageTime;
+
+	private AudioSource shootingSound;
 
 	// Use this for initialization
 	void Start () {
+		shootingSound = GetComponent<AudioSource> ();
+
 		if (isDefault == false) {
 			Disable();
-// 			transform.parent.renderer.enabled = false;
 		}
 	}
 	
@@ -38,5 +39,11 @@ public class Weapon : MonoBehaviour {
 		for (int i = 0; i < renderers.Length; i++) {
 			renderers[i].enabled = false;
 		}
+	}
+
+	public void PlaySound() {
+		shootingSound.enabled = true;
+		shootingSound.mute = false;
+		shootingSound.Play ();
 	}
 }

@@ -11,6 +11,7 @@ public class Level : MonoBehaviour {
 
 	private WeaponTrigger weaponTrigger;
 	private BonusTrigger bonusTrigger;
+	private static int playersAlive = 0;
 
 	public static PlayerRobot[] players;
 	public static Bonus bonusManager;
@@ -27,6 +28,7 @@ public class Level : MonoBehaviour {
 
 
 		players = gameObject.GetComponentsInChildren<PlayerRobot> ();
+		playersAlive = players.Length;
 		weapons = gameObject.GetComponentsInChildren<Weapon> ();
 		bonusManager = gameObject.GetComponentInChildren<Bonus> ();
 		weaponTrigger = gameObject.GetComponentInChildren<WeaponTrigger> ();
@@ -88,5 +90,22 @@ public class Level : MonoBehaviour {
 	 */
 	public static PlayerRobot GetPlayerById(int id) {
 		return (PlayerRobot)players.GetValue(id);
+	}
+
+	/**
+	 * Remove player from game
+	 */
+	public static void OnPlayerDies () {
+		playersAlive -= 1;
+		if (playersAlive <= 0) {
+			OnGameEnd();
+		}
+	}
+
+	/**
+	 * End of the game. Very sad moment ...
+	 */
+	private static void OnGameEnd() {
+		Debug.Log ("Game ended");
 	}
 }

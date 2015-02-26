@@ -59,6 +59,9 @@ public class Bonus : MonoBehaviour {
 		isActive = true;
 	}
 
+	/**
+	 * Remove bonus to player
+	 */
 	void DisableBonus() {
 		isActive = false;
 		applicator.Unapply (_player);

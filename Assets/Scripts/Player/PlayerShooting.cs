@@ -118,8 +118,8 @@ public class PlayerShooting : MonoBehaviour {
 		gunLine.SetPosition (1, transform.position);
 
 		if(weapon.isRoulette) {
-			int r = Random.Range(1, 6);
-			if(r != 6) {
+			int r = Random.Range(1, 3);
+			if(r != 2) {
 				// Shoot on player
 				robot.ReceiveDamages((damage / 4.0f));
 				return;

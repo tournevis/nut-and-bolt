@@ -39,19 +39,19 @@ public class Bonus : MonoBehaviour {
 			case LIFE_BONUS:
 				applicator = new LifeBonus ();
 				applicator.Apply (_player);
-				Level.DisplayAnnounce("LIFE!");
+				Level.DisplayAnnounce("Life!");
 				Invoke ("DisableBonus", applicator.duration);
 				break;
 			case SHIELD_BONUS:
 				applicator = new ShieldBonus ();
 				applicator.Apply (_player);
-				Level.DisplayAnnounce("SHIELD!");
+				Level.DisplayAnnounce("Shield!");
 				Invoke ("DisableBonus", applicator.duration);
 				break;
 			case INVINCIBILITY_BONUS:
 				applicator = new InvincibilityBonus ();
 				applicator.Apply (_player);
-				Level.DisplayAnnounce("INVICIBILITY!");
+				Level.DisplayAnnounce("Invincibility!");
 				Invoke ("DisableBonus", applicator.duration);
 				break;
 		}

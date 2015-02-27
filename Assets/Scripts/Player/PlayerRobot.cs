@@ -88,7 +88,7 @@ public class PlayerRobot : MonoBehaviour {
 
 		weapon.Disable ();
 		weapon = (Weapon)weapons.GetValue (i);
-		Level.DisplayAnnounce (weapon.name.ToUpper() + "!");
+		Level.DisplayAnnounce (weapon.name + "!");
 		weapon.Enable ();
 	}
 }

@@ -81,6 +81,7 @@ public class PlayerRobot : MonoBehaviour {
 		}
 		isAlive = false;
 		controls.enabled = false;
+		Destroy (gameObject);
 		Level.OnPlayerDies ();
 	}
 	

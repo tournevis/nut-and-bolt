@@ -29,6 +29,9 @@ public class turretShoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Level.paused)
+			return;
+
 		timeUpOn += Time.deltaTime; 
 		if (timeUpOn >= interval/2) {
 			anim.SetBool ("shooting", true);

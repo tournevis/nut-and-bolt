@@ -31,23 +31,64 @@ public class PlayerShooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Level.paused)
+			return;
 
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
-		if (robot.id == 0) {
-			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
-				Shoot ();
-			} else {
-				stopShoot ();
-			}
-		} else if (robot.id == 1) {
-			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
-				Shoot ();
-			} else {
-				stopShoot ();
-			}
-		}		
+//		if (robot.id == 0) {
+//			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+//				Shoot ();
+//			} else {
+//				stopShoot ();
+//			}
+//		} else if (robot.id == 1) {
+//			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+//				Shoot ();
+//			} else {
+//				stopShoot ();
+//			}
+//		}	
+
+		switch (robot.id) {
+			case 0 :
+				if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 1 :
+				if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 2 :
+				if (Input.GetButton ("FireRobot3") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 3 :
+				if (Input.GetButton ("FireRobot4") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			default :
+				
+				break;
+		}
+
 	}
 
 	void Shoot () {
@@ -73,14 +114,14 @@ public class PlayerShooting : MonoBehaviour {
 		shootRay.direction = transform.forward;
 
 
-		gunLine.SetPosition (0, transform.position + shootRay.direction * 10);
+		gunLine.SetPosition (0, transform.position + shootRay.direction * 100);
 		gunLine.SetPosition (1, transform.position);
 
 		if(weapon.isRoulette) {
 			int r = Random.Range(1, 6);
 			if(r != 6) {
 				// Shoot on player
-				robot.ReceiveDamages(weapon.damage);
+				robot.ReceiveDamages((damage / 4.0f));
 				return;
 			}
 		}
@@ -91,8 +132,10 @@ public class PlayerShooting : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				playerHit.ReceiveDamages(weapon.damage);
+				playerHit.ReceiveDamages((damage / 4.0f));
 			}
+
+			gunLine.SetPosition (0, shootHit.point);
 		}
 	}
 

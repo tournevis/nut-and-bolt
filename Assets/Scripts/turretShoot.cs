@@ -4,11 +4,8 @@ using System.Collections;
 public class turretShoot : MonoBehaviour {
 
 	public float interval ; 
-	
-	private float damage = 10.0f;
-	private float cadence = 0.15f;
+	public float damage;
 	public float timeUpOn;
-	float timer;
 
 	Light gunLight;
 	LineRenderer gunLine;
@@ -19,8 +16,8 @@ public class turretShoot : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		gunLine = GetComponent<LineRenderer>();
-		gunLight = GetComponent<Light>();
+		gunLine = GetComponentInChildren<LineRenderer>();
+		gunLight = GetComponentInChildren<Light>();
 
 		anim = GetComponent<Animator> ();
 	}
@@ -28,18 +25,24 @@ public class turretShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (Level.paused)
 			return;
 
 		timeUpOn += Time.deltaTime; 
+
 		if (timeUpOn >= interval/2) {
 			anim.SetBool ("shooting", true);
-			//Shoot ();	
+			transform.Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
+			gunLine.transform.Rotate(0.0f, 30.0f * Time.deltaTime, 0.0f);
+
+			if(timeUpOn >= interval/2 + 1.0f) {
+				Shoot();
+			}
+
 		} 
 		if (timeUpOn >= interval) {
 			anim.SetBool ("shooting", false);
-			//Shoot ();	
+			stopShoot ();	
 			timeUpOn = 0;
 		} 
 		
@@ -47,18 +50,17 @@ public class turretShoot : MonoBehaviour {
 	}
 	void Shoot () {
 
-		timer = 0;
+		Vector3 o = new Vector3 (transform.position.x, transform.position.y + 4.0f, transform.position.z);
 
 		gunLight.enabled = true;
-
 		gunLine.enabled = true;
+		
+		shootRay.origin = o;
+		shootRay.direction = -transform.forward;
 
-		shootRay.origin = transform.position;
-		shootRay.direction = transform.forward;
 
-
-		gunLine.SetPosition (0, transform.position + shootRay.direction * 10);
-		gunLine.SetPosition (1, transform.position);
+		gunLine.SetPosition (0, o);
+		gunLine.SetPosition (1, o + shootRay.direction * 50);
 
 		//Si rayon touche objet
 
@@ -66,8 +68,10 @@ public class turretShoot : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				playerHit.ReceiveDamages(20);
+				playerHit.ReceiveDamages(damage);
 			}
+
+			gunLine.SetPosition (1, shootHit.point);
 		}
 	}
 

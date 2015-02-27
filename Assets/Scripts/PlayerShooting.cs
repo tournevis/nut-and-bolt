@@ -35,19 +35,57 @@ public class PlayerShooting : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		// Si le joueur shoot et que le temps entre 2 tirs est inférieur à la cadence
-		if (robot.id == 0) {
-			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
-				Shoot ();
-			} else {
-				stopShoot ();
-			}
-		} else if (robot.id == 1) {
-			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
-				Shoot ();
-			} else {
-				stopShoot ();
-			}
-		}		
+//		if (robot.id == 0) {
+//			if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+//				Shoot ();
+//			} else {
+//				stopShoot ();
+//			}
+//		} else if (robot.id == 1) {
+//			if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+//				Shoot ();
+//			} else {
+//				stopShoot ();
+//			}
+//		}	
+
+		switch (robot.id) {
+			case 0 :
+				if (Input.GetButton ("FireRobot1") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 1 :
+				if (Input.GetButton ("FireRobot2") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 2 :
+				if (Input.GetButton ("FireRobot3") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			case 3 :
+				if (Input.GetButton ("FireRobot4") && timer >= cadence) {
+					Shoot ();
+				} else {
+					stopShoot ();
+				}
+				break;
+				
+			default :
+				
+				break;
+		}
 	}
 
 	void Shoot () {
@@ -73,7 +111,7 @@ public class PlayerShooting : MonoBehaviour {
 		shootRay.direction = transform.forward;
 
 
-		gunLine.SetPosition (0, transform.position + shootRay.direction * 10);
+		gunLine.SetPosition (0, transform.position + shootRay.direction * 100);
 		gunLine.SetPosition (1, transform.position);
 
 		if(weapon.isRoulette) {

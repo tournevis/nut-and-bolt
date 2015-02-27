@@ -28,14 +28,16 @@ public class turretShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		timeUpOn += Time.deltaTime; 
-		if (timeUpOn >= interval) {
-
-			anim.speed = 3;
+		if (timeUpOn >= interval/2) {
 			anim.SetBool ("shooting", true);
-			Shoot ();	
+			//Shoot ();	
+		} 
+		if (timeUpOn >= interval) {
+			anim.SetBool ("shooting", false);
+			//Shoot ();	
 			timeUpOn = 0;
-
 		} 
 		
 

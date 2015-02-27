@@ -31,6 +31,8 @@ public class PlayerShooting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Level.paused)
+			return;
 
 		timer += Time.deltaTime;
 

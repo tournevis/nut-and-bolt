@@ -13,14 +13,8 @@ public class directionShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		if (robotParent.id == 0) {
-//			viewV = Input.GetAxis("VerticalView1");
-//			viewH = Input.GetAxis("HorizontalView1");
-//		} else if (robotParent.id == 1) {
-//
-//		} else {
-//
-//		}
+		if (Level.paused)
+			return;
 
 		switch (robotParent.id) {
 			case 0 :

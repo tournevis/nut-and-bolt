@@ -4,8 +4,6 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 	public Text anounce;
-	public float turetInterval = 5.0f;
-	public float trapdoorsInterval = 3.0f;
 	public float weaponsInterval = 10.0f;
 	public float bonusInterval = 7.0f;
 
@@ -17,6 +15,7 @@ public class Level : MonoBehaviour {
 
 	public static PlayerRobot[] players;
 	public static Bonus bonusManager;
+	public static bool paused = false;
 
 	// Use this for initialization
 	void Start () {
@@ -24,8 +23,6 @@ public class Level : MonoBehaviour {
 		_announcer = anounce;
 		DisplayAnnounce ("GO!");
 
-		InvokeRepeating ("EnableTurret", 0.0f, turetInterval);
-		InvokeRepeating ("EnableTrapdoors", 0.0f, trapdoorsInterval);
 		InvokeRepeating ("SendWeapon", 5.0f, weaponsInterval);
 		InvokeRepeating ("SendBonus", 3.0f, bonusInterval);
 
@@ -43,25 +40,9 @@ public class Level : MonoBehaviour {
 
 	// Called when user quit game
     void OnApplicationQuit () {
-		CancelInvoke ("EnableTurret");
-		CancelInvoke ("EnableTrapdoors");
 		CancelInvoke ("SendWeapon");
 		CancelInvoke ("SendBonus");
     }
-
-	/**
-	 * Enable tourret  
-	 */
-    private void EnableTurret () {
-//        Debug.Log("Enable turret");
-    }
-
-	/**
-	 * Enable trapdoors  
-	 */
-	private void EnableTrapdoors () {
-//		Debug.Log("Enable trapdoors");
-	}
 
 	/**
 	 * Enable weapon box  
@@ -98,13 +79,15 @@ public class Level : MonoBehaviour {
 	 * End of the game. Very sad moment ...
 	 */
 	private static void OnGameEnd() {
-		Debug.Log ("Game ended");
 		for (int i = 0; i < players.Length; i++) {
 			if(players[i].isAlive) {
 				string text = "PLAYER " + (players[i].id + 1).ToString () + " WINS!";
-				DisplayAnnounce(text);
+				_announcer.text = text;
 			}
 		}
+		instance.CancelInvoke ("SendWeapon");
+		instance.CancelInvoke ("SendBonus");
+		paused = true;
 	}
 
 	public static void DisplayAnnounce(string text) {

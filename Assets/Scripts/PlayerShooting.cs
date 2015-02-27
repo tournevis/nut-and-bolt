@@ -86,6 +86,7 @@ public class PlayerShooting : MonoBehaviour {
 				
 				break;
 		}
+
 	}
 
 	void Shoot () {
@@ -118,7 +119,7 @@ public class PlayerShooting : MonoBehaviour {
 			int r = Random.Range(1, 6);
 			if(r != 6) {
 				// Shoot on player
-				robot.ReceiveDamages(weapon.damage);
+				robot.ReceiveDamages((damage / 4.0f));
 				return;
 			}
 		}
@@ -129,8 +130,10 @@ public class PlayerShooting : MonoBehaviour {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				playerHit.ReceiveDamages(weapon.damage);
+				playerHit.ReceiveDamages((damage / 4.0f));
 			}
+
+			gunLine.SetPosition (0, shootHit.point);
 		}
 	}
 

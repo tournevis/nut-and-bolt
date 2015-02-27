@@ -18,11 +18,14 @@ public class PlayerRobot : MonoBehaviour {
 	public float receivedDamageFactor = 1.0f;
 	public bool isAlive = true;
 
+	ParticleSystem damageSmoke;
+
 	// Use this for initialization
 	void Start () {
 		controls = GetComponent<ThirdPersonController> ();
 		weapons = GetComponentsInChildren<Weapon> ();
 		currentLife = maxLife;
+		damageSmoke = GetComponentInChildren<ParticleSystem> ();
 //		sliderLife.value = currentLife;
 	}
 	
@@ -38,7 +41,9 @@ public class PlayerRobot : MonoBehaviour {
 		if (isAlive == false)
 			return;
 
-		currentLife -= (receivedDamageFactor * damages);
+		damageSmoke.Play ();
+		float d = receivedDamageFactor * damages;
+		currentLife =  currentLife - d;
 		sliderLife.value = currentLife;
 
 		if (currentLife <= minLife) {
@@ -46,6 +51,8 @@ public class PlayerRobot : MonoBehaviour {
 			sliderLife.value = currentLife;
 			Die();
 		}
+
+
 	}
 
 	/**

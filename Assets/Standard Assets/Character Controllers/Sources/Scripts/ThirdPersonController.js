@@ -145,15 +145,42 @@ function UpdateSmoothedMovementDirection ()
 	var v;
 	var h;
 	
-	if (idPerson == 0) {
-		v = Input.GetAxisRaw("Vertical1");
-		h = Input.GetAxisRaw("Horizontal1");
-	} else if (idPerson == 1) {
-		v = Input.GetAxisRaw("Vertical2");
-		h = Input.GetAxisRaw("Horizontal2");
-	} else {
-		v = 0;
-		h = 0;
+//	if (idPerson == 0) {
+//		v = Input.GetAxisRaw("Vertical1");
+//		h = Input.GetAxisRaw("Horizontal1");
+//	} else if (idPerson == 1) {
+//		v = Input.GetAxisRaw("Vertical2");
+//		h = Input.GetAxisRaw("Horizontal2");
+//	} else {
+//		v = 0;
+//		h = 0;
+//	}
+	
+	switch (idPerson) {
+		case 0 :
+			v = Input.GetAxis("Vertical1");
+			h = Input.GetAxis("Horizontal1");
+			break;
+
+		case 1 :
+			v = Input.GetAxis("Vertical2");
+			h = Input.GetAxis("Horizontal2");
+			break;
+				
+		case 2 :
+			v = Input.GetAxis("Vertical3");
+			h = Input.GetAxis("Horizontal3");
+			break;
+
+		case 3 :
+			v = Input.GetAxis("Vertical4");
+			h = Input.GetAxis("Horizontal4");
+			break;
+
+		default :
+			v = 0;
+			h = 0;
+			break;
 	}
 
 	
@@ -317,17 +344,17 @@ function Update() {
 		Input.ResetInputAxes();
 	}
 	
-	if (idPerson == 0) {
-		if (Input.GetButtonDown ("JumpRobot1"))
-		{
-			lastJumpButtonTime = Time.time;
-		}
-	} else if (idPerson == 1) {
-		if (Input.GetButtonDown ("JumpRobot2"))
-		{
-			lastJumpButtonTime = Time.time;
-		}
-	}
+//	if (idPerson == 0) {
+//		if (Input.GetButtonDown ("JumpRobot1"))
+//		{
+//			lastJumpButtonTime = Time.time;
+//		}
+//	} else if (idPerson == 1) {
+//		if (Input.GetButtonDown ("JumpRobot2"))
+//		{
+//			lastJumpButtonTime = Time.time;
+//		}
+//	}
 
 	UpdateSmoothedMovementDirection();
 	

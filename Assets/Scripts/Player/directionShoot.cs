@@ -16,18 +16,60 @@ public class directionShoot : MonoBehaviour {
 		if (Level.paused)
 			return;
 
-		if (robotParent.id == 0) {
-			viewV = Input.GetAxis("VerticalView1");
-			viewH = Input.GetAxis("HorizontalView1");
-		} else if (robotParent.id == 1) {
+		switch (robotParent.id) {
+			case 0 :
+				viewV = Input.GetAxis("VerticalView1");
+				viewH = Input.GetAxis("HorizontalView1");
+				break;
 
-		} else {
+			case 1 :
+				viewV = Input.GetAxis("VerticalView2");
+				viewH = Input.GetAxis("HorizontalView2");
+				break;
+				
+			case 2 :
+				viewV = Input.GetAxis("VerticalView3");
+				viewH = Input.GetAxis("HorizontalView3");
+				break;
 
+			case 3 :
+				viewV = Input.GetAxis("VerticalView4");
+				viewH = Input.GetAxis("HorizontalView4");
+				break;
+
+			default :
+
+				break;
 		}
 
+
 		if (viewH == 0 && viewV == 0) {
-			viewV = Input.GetAxis("Vertical1");
-			viewH = Input.GetAxis("Horizontal1");
+			switch (robotParent.id) {
+			case 0 :
+				viewV = Input.GetAxis("Vertical1");
+				viewH = Input.GetAxis("Horizontal1");
+				break;
+				
+			case 1 :
+				viewV = Input.GetAxis("Vertical2");
+				viewH = Input.GetAxis("Horizontal2");
+				break;
+				
+			case 2 :
+				viewV = Input.GetAxis("Vertical3");
+				viewH = Input.GetAxis("Horizontal3");
+				break;
+				
+			case 3 :
+				viewV = Input.GetAxis("Vertical4");
+				viewH = Input.GetAxis("Horizontal4");
+				break;
+				
+			default :
+				
+				break;
+			}
+
 			transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);
 		} else {
 			transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);

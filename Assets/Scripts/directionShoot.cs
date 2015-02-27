@@ -21,8 +21,13 @@ public class directionShoot : MonoBehaviour {
 		} else {
 
 		}
-	
-		Debug.Log (viewV);
-		transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);
+
+		if (viewH == 0 && viewV == 0) {
+			viewV = Input.GetAxis("Vertical1");
+			viewH = Input.GetAxis("Horizontal1");
+			transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);
+		} else {
+			transform.rotation = Quaternion.Euler(0, -(Mathf.Atan2(viewH, viewV) * Mathf.Rad2Deg), 0);
+		}
 	}
 }

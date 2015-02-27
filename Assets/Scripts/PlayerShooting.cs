@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour {
 	RaycastHit shootHit;
 	PlayerRobot robot;
 	Weapon weapon;
-	AudioSource shootingSound; // Audio
+//	AudioSource shootingSound; // Audio
 
 
 	// Use this for initialization
@@ -22,7 +22,7 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
-		shootingSound = GetComponent<AudioSource> ();
+//		shootingSound = GetComponent<AudioSource> ();
 		robot = transform.parent.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
 		weapon = robot.weapon;
 		cadence = weapon.rate;
@@ -52,13 +52,11 @@ public class PlayerShooting : MonoBehaviour {
 	}
 
 	void Shoot () {
-
-		Debug.Log (shootingSound.clip);
-
-
 		weapon = robot.weapon;
 		cadence = weapon.rate;
 		damage = weapon.damage;
+
+		weapon.PlaySound ();
 
 		timer = 0;
 
@@ -66,10 +64,6 @@ public class PlayerShooting : MonoBehaviour {
 
 		gunParticle.Stop ();
 		gunParticle.Play ();
-
-		shootingSound.enabled = true;
-		shootingSound.mute = false;
-		shootingSound.Play ();
 
 		gunLine.enabled = true;
 
@@ -80,25 +74,22 @@ public class PlayerShooting : MonoBehaviour {
 		gunLine.SetPosition (0, transform.position + shootRay.direction * 10);
 		gunLine.SetPosition (1, transform.position);
 
+		if(weapon.isRoulette) {
+			int r = Random.Range(1, 6);
+			if(r != 6) {
+				// Shoot on player
+				robot.ReceiveDamages(weapon.damage);
+				return;
+			}
+		}
+
 		//Si rayon touche objet
 
 		if (Physics.Raycast (shootRay, out shootHit)) {
 			PlayerRobot playerHit = shootHit.collider.GetComponent<PlayerRobot> ();
 
 			if (playerHit != null) {
-				if(weapon.isRoulette) {
-					int r = Random.Range(1, 6);
-					if(r == 6) {
-						// Shoot on target
-						playerHit.ReceiveDamages(weapon.damage);
-					} else {
-						// Shoot on player
-						robot.ReceiveDamages(weapon.damage);
-					}
-				} else {
-					playerHit.ReceiveDamages(weapon.damage);
-				}
-
+				playerHit.ReceiveDamages(weapon.damage);
 			}
 		}
 	}
@@ -106,7 +97,6 @@ public class PlayerShooting : MonoBehaviour {
 	void stopShoot () {
 		gunLine.enabled = false;
 		gunLight.enabled = false;
-//		shootingSound.enabled = false;
 	}
 
 }

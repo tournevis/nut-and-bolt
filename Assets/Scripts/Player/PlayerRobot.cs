@@ -28,7 +28,9 @@ public class PlayerRobot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Level.paused) {
+			controls.enabled = false;
+		}
 	}
 
 	/**

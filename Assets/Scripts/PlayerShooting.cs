@@ -22,7 +22,6 @@ public class PlayerShooting : MonoBehaviour {
 		gunParticle = GetComponent<ParticleSystem>();
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
-//		shootingSound = GetComponent<AudioSource> ();
 		robot = transform.parent.parent.parent.parent.GetComponent<PlayerRobot> (); // Sorry for this ugly stuff
 		weapon = robot.weapon;
 		cadence = weapon.rate;
@@ -52,6 +51,9 @@ public class PlayerShooting : MonoBehaviour {
 	}
 
 	void Shoot () {
+		if (robot.isAlive == false)
+			return;
+
 		weapon = robot.weapon;
 		cadence = weapon.rate;
 		damage = weapon.damage;

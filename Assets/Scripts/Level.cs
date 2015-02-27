@@ -81,7 +81,7 @@ public class Level : MonoBehaviour {
 	private static void OnGameEnd() {
 		for (int i = 0; i < players.Length; i++) {
 			if(players[i].isAlive) {
-				string text = "PLAYER " + (players[i].id + 1).ToString () + " WINS!";
+				string text = "Player " + (players[i].id + 1).ToString () + " wins!";
 				_announcer.text = text;
 			}
 		}

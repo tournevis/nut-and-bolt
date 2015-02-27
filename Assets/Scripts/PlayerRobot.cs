@@ -68,7 +68,7 @@ public class PlayerRobot : MonoBehaviour {
 	void Die () {
 		Renderer[] renderers = GetComponentsInChildren<Renderer> ();
 		for (int i = 0; i < renderers.Length; i++) {
-			renderers[i].enabled = true;
+			renderers[i].enabled = false;
 		}
 		isAlive = false;
 		controls.enabled = false;
